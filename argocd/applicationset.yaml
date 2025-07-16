@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: vcluster-argocd-application
+  namespace: argocd
+spec:
+  generators:
+  - pullRequest:
+      github:
+        owner: bdecoste
+        repo: application
+  template:
+    metadata:
+      name: 'vcluster-{{branch}}-{{number}}'
+    spec:
+      source:
+        repoURL: https://github.com/bdecoste/vcluster-argocd.git
+        targetRevision: main
+        path: vcluster
+        kustomize:
+          patches:
+            - patch: |-
+                - op: add
+                  path: /metadata/labels/vclusterName
+                  value: 'test-pr-{{number}}'
+                - op: add
+                  path: /metadata/labels/prNumber
+                  value: '{{number}}'
+                - op: add
+                  path: /metadata/labels/headBranch
+                  value: '{{branch}}'
+                - op: replace
+                  path: /metadata/name
+                  value: 'test-pr-{{number}}'
+                - op: replace
+                  path: /spec/clusterRef/virtualCluster
+                  value: 'test-pr-{{number}}'
+                - op: replace
+                  path: /spec/displayName
+                  value: 'test-pr-{{number}}'
+              target:
+                kind: VirtualClusterInstance
+                name: test
+      project: demo
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: p-demo
