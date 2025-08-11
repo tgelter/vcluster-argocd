@@ -1,8 +1,6 @@
-apiVersion: storage.loft.sh/v1
+apiVersion: management.loft.sh/v1
 kind: VirtualClusterInstance
 metadata:
-  finalizers:
-  - loft.sh/cleanup
   labels: {}
   name: test
   namespace: p-demo
