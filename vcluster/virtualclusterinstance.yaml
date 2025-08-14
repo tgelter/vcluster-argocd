@@ -3,7 +3,7 @@ kind: VirtualClusterInstance
 metadata:
   labels: {}
   name: test
-  namespace: p-demo
+  namespace: p-default
 spec:
   clusterRef:
     cluster: loft-cluster

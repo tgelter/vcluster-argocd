@@ -7,14 +7,14 @@ spec:
   generators:
   - pullRequest:
       github:
-        owner: bdecoste
+        owner: tgelter
         repo: application
   template:
     metadata:
       name: 'vcluster-{{branch}}-{{number}}'
     spec:
       source:
-        repoURL: https://github.com/bdecoste/vcluster-argocd.git
+        repoURL: https://github.com/tgelter/vcluster-argocd.git
         targetRevision: main
         path: vcluster
         kustomize:
@@ -41,7 +41,7 @@ spec:
               target:
                 kind: VirtualClusterInstance
                 name: test
-      project: demo
+      project: default
       destination:
         server: https://kubernetes.default.svc
-        namespace: p-demo
+        namespace: p-default
