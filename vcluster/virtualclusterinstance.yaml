@@ -2,13 +2,13 @@ apiVersion: storage.loft.sh/v1
 kind: VirtualClusterInstance
 metadata:
   labels: {}
-  name: test
+  name: argocd-test-vci
   namespace: p-default
 spec:
   clusterRef:
     cluster: loft-cluster
-    virtualCluster: test
-  displayName: test
+    virtualCluster: argocd-test-vcluster
+  displayName: Argo CD managed vCluster
   networkPeer: true
   owner:
     user: admin
