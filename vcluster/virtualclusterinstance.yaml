@@ -34,7 +34,7 @@ spec:
           distro:
             k8s:
               enabled: true
-              version: v1.31.1
+              version: v1.32.8
         sleepMode:
           autoSleep:
             afterInactivity: 3600s
